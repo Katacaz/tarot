@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11162b">
+  <meta name="description" content="A daily Major Arcana reading from the Arcana Signal.">
+  <title>Arcana Signal — Daily Draw</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./tarot.js" defer></script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span class="stripe stripe-one"></span><span class="stripe stripe-two"></span></div>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Arcana Signal homepage"><span class="brand-symbol">✦</span> ARCANA<span class="brand-accent">//</span>SIGNAL</a>
+      <span class="edition">THE MAJOR ARCANA <b>001—022</b></span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow"><span class="diamond">◆</span> YOUR FATE IS ON THE LINE</p>
+        <h1 id="page-title">TODAY'S <span>ARCANA</span></h1>
+        <div class="hero-info"><p>A new card. A new possibility.<br>One fate, every day.</p><p class="date" id="reading-date">—</p></div>
+      </section>
+
+      <section class="reading-layout" aria-label="Your cards">
+        <article class="panel bound-panel" id="bound-panel" hidden>
+          <div class="panel-heading"><span class="panel-num">01 / IDENTITY</span><h2>BOUND ARCANA</h2></div>
+          <div class="card-frame"><img id="bound-image" src="./assets/cards/00-fool.svg" alt="" width="300" height="480"></div>
+          <div class="card-details"><div class="arcana-number" id="bound-number">00</div><h3 id="bound-name">The Fool</h3><p id="bound-description">Your permanent card.</p></div>
+        </article>
+
+        <article class="panel daily-panel" id="daily-panel">
+          <div class="panel-heading"><span class="panel-num" id="daily-label">01 / DAILY READING</span><h2>DAILY DRAW</h2></div>
+          <div class="card-stage" id="card-stage">
+            <div class="card-frame card-back" id="card-back" aria-hidden="true"><div class="card-back-inner"><span>✦</span><small>ARCANA SIGNAL</small><span>✦</span></div></div>
+            <div class="card-frame card-revealed" id="card-revealed" hidden><img id="daily-image" src="./assets/cards/00-fool.svg" alt="" width="300" height="480"></div>
+          </div>
+          <div class="card-details" id="daily-details" hidden><div class="arcana-number" id="daily-number">00</div><h3 id="daily-name">The Fool</h3><p id="daily-description">A reading awaits.</p><p class="flavour" id="daily-flavour"></p></div>
+          <button class="reveal-button" id="reveal-button" type="button">REVEAL YOUR CARD <span aria-hidden="true">↗</span></button>
+          <p class="hint" id="draw-hint">Your reading is fixed until tomorrow.</p>
+        </article>
+      </section>
+      <p class="footnote" id="identity-note">NO KEYCHAIN REQUIRED // ONE CARD PER DAY</p>
+    </main>
+    <footer><span>ARCANA SIGNAL <span class="brand-accent">✦</span> EXPERIMENTAL DIVINATION</span><span>FOR ENTERTAINMENT ONLY</span></footer>
+  </div>
+</body>
+</html>

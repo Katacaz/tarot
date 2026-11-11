@@ -24,7 +24,7 @@ const CARDS = [
   ['The Sun','Joy, vitality, and welcome clarity.','You are contractually obliged to have a nice moment.'],
   ['Judgement','Reflection, awakening, and big decisions.','Your annual performance review is with the universe.'],
   ['The World','Completion, achievement, and new horizons.','Quest completed. Side quests remain.']
-].map(([name,meaning,flavour],index)=>({id:index+1,name,meaning,flavour,image:`./assets/cards/${String(index).padStart(2,'0')}-${name.toLowerCase().replaceAll(' ','-')}.svg`}));
+].map(([name,meaning,flavour],index)=>({id:index+1,name,meaning,flavour,image:`./assets/cards/${String(index).padStart(2,'0')}-${name.toLowerCase().replaceAll(' ','-')}.webp`}));
 
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(window.location.search);

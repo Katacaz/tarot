@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#11162b">
-  <meta name="description" content="A daily Major Arcana reading from the Arcana Signal.">
-  <title>Arcana Signal — Daily Draw</title>
+  <meta name="description" content="A layered daily Major Arcana reading from Tarot Chain.">
+  <title>Tarot Chain — Daily Reading</title>
   <link rel="stylesheet" href="./style.css">
   <script src="./tarot.js" defer></script>
 </head>
@@ -13,38 +13,62 @@
   <div class="backdrop" aria-hidden="true"><span class="stripe stripe-one"></span><span class="stripe stripe-two"></span></div>
   <div class="site-shell">
     <header class="topbar">
-      <a class="brand" href="./" aria-label="Arcana Signal homepage"><span class="brand-symbol">✦</span> ARCANA<span class="brand-accent">//</span>SIGNAL</a>
-      <span class="edition">THE MAJOR ARCANA <b>001—022</b></span>
+      <a class="brand" href="./" aria-label="Tarot Chain homepage"><span class="brand-symbol" aria-hidden="true">⛓</span> TAROT<span class="brand-accent">//</span>CHAIN</a>
+      <div class="topbar-reading"><span class="topbar-title">TODAY'S <b>ARCANA</b></span><span class="date" id="reading-date">—</span></div>
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow"><span class="diamond">◆</span> YOUR FATE IS ON THE LINE</p>
-        <h1 id="page-title">TODAY'S <span>ARCANA</span></h1>
-        <div class="hero-info"><p>A new card. A new possibility.<br>One fate, every day.</p><p class="date" id="reading-date">—</p></div>
-      </section>
+      <section class="reading-workspace" id="reading-workspace" aria-label="Your daily tarot reading">
+        <button class="edge-tab reading-toggle" id="reading-toggle" type="button" aria-controls="reading-panel" aria-expanded="false"><span aria-hidden="true">¶</span><span>READING</span></button>
 
-      <section class="reading-layout" aria-label="Your cards">
-        <article class="panel bound-panel" id="bound-panel" hidden>
-          <div class="panel-heading"><span class="panel-num">01 / IDENTITY</span><h2>BOUND ARCANA</h2></div>
-          <div class="card-frame"><img id="bound-image" src="./assets/cards/00-fool.webp" alt="" width="300" height="480"></div>
-          <div class="card-details"><div class="arcana-number" id="bound-number">00</div><h3 id="bound-name">The Fool</h3><p id="bound-description">Your permanent card.</p></div>
-        </article>
+        <aside class="reading-panel" id="reading-panel" aria-labelledby="reading-title">
+          <div class="section-label">01 / SYNTHESIS</div>
+          <button class="drawer-close" id="reading-close" type="button" aria-label="Close reading">×</button>
+          <h2 id="reading-title">YOUR READING</h2>
+          <div class="reading-content" id="reading-content" hidden>
+            <p class="reading-lead" id="reading-lead"></p>
+            <p id="reading-text"></p>
+            <div class="reading-keywords" id="reading-keywords" aria-label="Reading themes"></div>
+          </div>
+          <p class="reading-prompt" id="reading-prompt">Reveal today’s Arcana to receive your complete reading.</p>
+          <p class="reading-note" id="identity-note">GUEST READING // UNBOUND</p>
+        </aside>
 
-        <article class="panel daily-panel" id="daily-panel">
-          <div class="panel-heading"><span class="panel-num" id="daily-label">01 / DAILY READING</span><h2>DAILY DRAW</h2></div>
+        <div class="panel-resizer" id="panel-resizer" role="separator" aria-label="Resize reading and card panels" aria-orientation="vertical" aria-valuemin="230" aria-valuenow="320" tabindex="0"><span aria-hidden="true"></span></div>
+
+        <article class="daily-panel" aria-labelledby="daily-heading">
+          <div class="daily-heading">
+            <span class="section-label">02 / DAILY ARCANA</span>
+            <h2 id="daily-heading">DAILY DRAW</h2>
+          </div>
           <div class="card-stage" id="card-stage">
-            <div class="card-frame card-back" id="card-back" aria-hidden="true"><div class="card-back-inner"><span>✦</span><small>ARCANA SIGNAL</small><span>✦</span></div></div>
-            <div class="card-frame card-revealed" id="card-revealed" hidden><img id="daily-image" src="./assets/cards/00-the-fool.webp" alt="" width="300" height="480"></div>
+            <div class="card-frame card-back" id="card-back" aria-hidden="true"><div class="card-back-inner"><span>⛓</span><small>TAROT CHAIN</small><span>⛓</span></div></div>
+            <div class="card-frame card-revealed" id="card-revealed" hidden><img id="daily-image" src="./assets/cards/00-the-fool.webp" alt="" width="215" height="381"></div>
           </div>
           <div class="card-details" id="daily-details" hidden><div class="arcana-number" id="daily-number">00</div><h3 id="daily-name">The Fool</h3><p id="daily-description">A reading awaits.</p><p class="flavour" id="daily-flavour"></p></div>
           <button class="reveal-button" id="reveal-button" type="button">REVEAL YOUR CARD <span aria-hidden="true">↗</span></button>
-          <p class="hint" id="draw-hint">Your reading is fixed until tomorrow.</p>
+          <p class="hint" id="draw-hint">One shared Arcana, fixed until tomorrow.</p>
         </article>
+
+        <aside class="modifier-shell" id="modifier-shell" aria-label="Reading conditions">
+          <section class="modifier-detail" id="modifier-detail" hidden aria-live="polite">
+            <button class="drawer-close" id="modifier-close" type="button" aria-label="Close condition details">×</button>
+            <p class="section-label" id="modifier-kicker">CONDITION</p>
+            <div class="modifier-detail-icon"><img id="modifier-detail-image" src="./assets/icons/unbound.svg" alt="" width="48" height="48"></div>
+            <h2 id="modifier-title">UNBOUND</h2>
+            <p id="modifier-description"></p>
+          </section>
+          <nav class="modifier-rail" aria-label="Reading condition tabs">
+            <button class="modifier-tab" type="button" data-modifier="identity" aria-controls="modifier-detail" aria-expanded="false"><img id="identity-icon" src="./assets/icons/unbound.svg" alt="" width="48" height="48"><span>ARCANA</span></button>
+            <button class="modifier-tab" type="button" data-modifier="direction" aria-controls="modifier-detail" aria-expanded="false"><img id="direction-icon" src="./assets/icons/direction-upright.svg" alt="" width="48" height="48"><span>DIRECTION</span></button>
+            <button class="modifier-tab" type="button" data-modifier="moon" aria-controls="modifier-detail" aria-expanded="false"><img id="moon-icon" src="./assets/icons/moon-new.svg" alt="" width="48" height="48"><span>MOON</span></button>
+            <button class="modifier-tab" type="button" data-modifier="zodiac" aria-controls="modifier-detail" aria-expanded="false"><img id="zodiac-icon" src="./assets/icons/zodiac-aries.svg" alt="" width="48" height="48"><span>ZODIAC</span></button>
+            <button class="modifier-tab" type="button" data-modifier="planet" aria-controls="modifier-detail" aria-expanded="false"><img id="planet-icon" src="./assets/icons/day-sun.svg" alt="" width="48" height="48"><span>PLANET</span></button>
+          </nav>
+        </aside>
       </section>
-      <p class="footnote" id="identity-note">NO KEYCHAIN REQUIRED // ONE CARD PER DAY</p>
     </main>
-    <footer><span>ARCANA SIGNAL <span class="brand-accent">✦</span> EXPERIMENTAL DIVINATION</span><span>FOR ENTERTAINMENT ONLY</span></footer>
   </div>
+  <button class="drawer-scrim" id="drawer-scrim" type="button" aria-label="Close open panel" hidden></button>
 </body>
 </html>

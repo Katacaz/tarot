@@ -81,6 +81,10 @@ body.is-resizing{cursor:col-resize;user-select:none}
 .modifier-detail{position:absolute;z-index:2;top:0;right:66px;bottom:0;width:min(310px,30vw);padding:25px 22px;border:2px solid var(--cream);border-right:0;box-shadow:-10px 10px 0 rgba(0,0,0,.32);overflow:auto;background:linear-gradient(155deg,rgba(23,31,60,.8),rgba(11,16,35,.8));backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
 .modifier-detail-icon{width:64px;height:64px;border:1px solid var(--line);display:grid;place-items:center;margin-top:34px;background:rgba(255,255,255,.03)}
 .modifier-detail-icon img{width:48px;height:48px}
+.modifier-detail-icon.is-card{width:min(125px,100%);height:auto;aspect-ratio:215/381;padding:3px;border:2px solid var(--cream);box-shadow:6px 6px 0 rgba(0,0,0,.38)}
+.modifier-detail-icon.is-card img{width:100%;height:100%;object-fit:cover;display:block}
+.modifier-detail-icon.is-illustration{width:min(190px,100%);height:auto;aspect-ratio:1;padding:8px;border:1px solid var(--line);background:rgba(11,16,35,.28)}
+.modifier-detail-icon.is-illustration img{width:100%;height:100%;object-fit:contain;display:block}
 .modifier-detail h2{font-size:clamp(22px,2.3vw,32px);overflow-wrap:anywhere}
 .modifier-detail>p:last-child{font-size:13px;margin-bottom:0}
 .modifier-rail{width:68px;flex:0 0 68px;height:100%;display:flex;flex-direction:column;overflow:hidden;z-index:1}

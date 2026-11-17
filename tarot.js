@@ -85,7 +85,7 @@ function getZodiac(month,day){
   const md=month*100+day;
   const key=md>=1222||md<120?'capricorn':md>=1122?'sagittarius':md>=1023?'scorpio':md>=923?'libra':md>=823?'virgo':md>=723?'leo':md>=621?'cancer':md>=521?'gemini':md>=420?'taurus':md>=321?'aries':md>=219?'pisces':'aquarius';
   const [name,file,description]=ZODIAC[key];
-  return {name,icon:`./assets/icons/${file}`,description};
+  return {name,icon:`./assets/icons/${file}`,detailImage:`./assets/zodiac/${key}.svg`,detailType:'illustration',description};
 }
 
 const PLANETARY_DAYS = [
@@ -104,11 +104,14 @@ const moon = getMoonPhase(readingMoment);
 const zodiac = getZodiac(Number(part('month')),Number(part('day')));
 const planet = getPlanetaryDay(readingMoment);
 const direction = isReversed
-  ? {name:'Reversed',icon:'./assets/icons/direction-reversed.svg',description:'The card is reversed. Its energy may be internal, delayed, blocked, or asking to be reconsidered rather than expressed directly.'}
-  : {name:'Upright',icon:'./assets/icons/direction-upright.svg',description:'The card is upright. Its central themes are available for direct expression and conscious action.'};
+  ? {label:'Direction',name:'Reversed',icon:'./assets/icons/direction-reversed.svg',description:'The card is reversed. Its energy may be internal, delayed, blocked, or asking to be reconsidered rather than expressed directly.'}
+  : {label:'Direction',name:'Upright',icon:'./assets/icons/direction-upright.svg',description:'The card is upright. Its central themes are available for direct expression and conscious action.'};
+moon.label='Lunar Phase';
+zodiac.label='Zodiac Season';
+planet.label='Planetary Day';
 const identity = boundCard
-  ? {name:`Bound · ${boundCard.name}`,icon:'./assets/icons/bound.svg',description:`Your permanent Arcana is ${boundCard.name}. ${boundCard.meaning} It acts as the personal lens through which today’s shared card is received.`}
-  : {name:'Unbound',icon:'./assets/icons/unbound.svg',description:'You carry no fixed Arcana into this reading. Today’s card stands without a permanent archetype, reflecting openness, adaptability, and a path that is not yet defined.'};
+  ? {label:'Bound Arcana',name:boundCard.name,icon:'./assets/icons/bound.svg',detailImage:boundCard.image,detailType:'card',description:`Your permanent Arcana is ${boundCard.name}. ${boundCard.meaning} It acts as the personal lens through which today’s shared card is received.`}
+  : {label:'Arcana',name:'Unbound',icon:'./assets/icons/unbound.svg',description:'You carry no fixed Arcana into this reading. Today’s card stands without a permanent archetype, reflecting openness, adaptability, and a path that is not yet defined.'};
 
 const modifiers = {identity,direction,moon,zodiac,planet};
 for(const [key,value] of Object.entries(modifiers)){
@@ -186,11 +189,14 @@ function openModifier(key,pin=false){
   const value=modifiers[key];
   activeModifier=key;
   if(pin)pinnedModifier=key;
-  $('modifier-kicker').textContent=`0${Object.keys(modifiers).indexOf(key)+3} / CONDITION`;
+  $('modifier-kicker').textContent=value.label;
   $('modifier-title').textContent=value.name;
   $('modifier-description').textContent=value.description;
-  $('modifier-detail-image').src=value.icon;
-  $('modifier-detail-image').alt='';
+  $('modifier-detail-image').src=value.detailImage||value.icon;
+  $('modifier-detail-image').alt=value.detailType==='card'?`${value.name} tarot card`:value.detailType==='illustration'?`${value.name} line-art representation`:'';
+  const detailFrame=$('modifier-detail-image').parentElement;
+  detailFrame.classList.toggle('is-card',value.detailType==='card');
+  detailFrame.classList.toggle('is-illustration',value.detailType==='illustration');
   $('modifier-detail').hidden=false;
   $('modifier-shell').classList.add('is-open');
   document.body.classList.add('modifier-open');
